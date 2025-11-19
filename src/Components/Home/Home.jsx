@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import avatarImg from "../../assets/7358602-removebg-preview.png";
+import avatarImg from "../../assets/mithun-image.png";
 import TextChange from "../TextChange";
 import { BASE_URL } from "../../../config/url";
 import { Toaster, toast } from "react-hot-toast";
 import { BiLoaderAlt } from "react-icons/bi";
 import { FiDownload } from "react-icons/fi";
-
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,18 +24,37 @@ const Home = () => {
   // 🎨 Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { delayChildren: 0.3, staggerChildren: 0.2 } },
+    visible: {
+      opacity: 1,
+      transition: { delayChildren: 0.3, staggerChildren: 0.2 },
+    },
   };
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
   };
   const avatarVariants = {
     hidden: { scale: 0, rotate: -10 },
-    visible: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 100, damping: 15, duration: 0.8 } },
-    hover: { scale: 1.05, rotate: 5, transition: { type: "spring", stiffness: 300 } },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        duration: 0.8,
+      },
+    },
+    hover: {
+      scale: 1.05,
+      rotate: 5,
+      transition: { type: "spring", stiffness: 300 },
+    },
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,11 +102,10 @@ const Home = () => {
     }
   };
 
-
   return (
     <section
       id="home"
-      className="min-h-screen text-white flex flex-col md:flex-row w-full justify-between items-center p-6 md:p-20 md:pt-14 pt-24 lg:pt-28 lg:p-36 bg-gradient-to-br from-[#0d1b2a] via-[#1b263b] to-[#2c3e50] relative overflow-hidden"
+      className="text-white flex flex-col md:flex-row w-full justify-between items-center p-6 md:p-20 md:pt-14 pt-24 lg:pt-28 lg:p-36 bg-gradient-to-br from-[#0d1b2a] via-[#1b263b] to-[#2c3e50] relative overflow-hidden"
     >
       <Toaster
         position="top-right"
@@ -110,63 +127,77 @@ const Home = () => {
       <div className="absolute bottom-20 right-20 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
       <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-cyan-500/10 rounded-full blur-lg" />
 
-      <motion.div
+      <Motion.div
         className="flex flex-col md:flex-row w-full max-w-7xl justify-between items-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* LEFT TEXT SECTION */}
-        <motion.div className="md:w-1/2 lg:w-2/5 md:pr-10 space-y-6 z-10" variants={containerVariants}>
-          <motion.h3 className="text-lg font-light text-gray-300" variants={itemVariants}>
+        <Motion.div
+          className="md:w-1/2 lg:w-2/5 md:pr-10 space-y-6 z-10"
+          variants={containerVariants}
+        >
+          <Motion.h3
+            className="text-lg font-light text-gray-300"
+            variants={itemVariants}
+          >
             Hello, I'm
-          </motion.h3>
+          </Motion.h3>
 
-          <motion.h1
+          <Motion.h1
             className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white pb-2 leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
             variants={itemVariants}
           >
-            Biplab
+            Mithun
             <span className="bg-gradient-to-r ml-3 from-[#465697] to-[#5a67b1] bg-clip-text text-transparent">
-              Biswas
+              Mishra
             </span>
-          </motion.h1>
+          </Motion.h1>
 
-          <motion.div className="text-xl md:text-2xl font-semibold flex flex-wrap items-center" variants={itemVariants}>
+          <Motion.div
+            className="text-xl md:text-2xl font-semibold flex flex-wrap items-center"
+            variants={itemVariants}
+          >
             <span className="mr-2 text-gray-200">I'm a</span>
             <TextChange />
-          </motion.div>
+          </Motion.div>
 
-          <motion.p
+          <Motion.p
             className="text-base md:text-lg text-gray-300 tracking-normal max-w-lg mt-4 leading-relaxed"
             variants={itemVariants}
           >
-            Passionate Full Stack Developer specializing in building scalable, responsive, and
-            user-friendly web applications using{" "}
-            <span className="font-semibold text-white">React.js</span>,{" "}
-            <span className="font-semibold text-white">Node.js</span>, and{" "}
-            <span className="font-semibold text-white">MongoDB/PostgreSQL</span>.
-          </motion.p>
+            I pursue stories that challenge power, uncover facts, and amplify
+            voices that often go unheard. My reporting is driven by truth,
+            integrity, and a commitment to meaningful journalism.
+          </Motion.p>
 
           {/* Buttons */}
-          <motion.div className="flex w-full flex-wrap gap-4 mt-8" variants={itemVariants}>
-            <motion.button
+          <Motion.div
+            className="flex w-full flex-wrap gap-4 mt-8"
+            variants={itemVariants}
+          >
+            <Motion.button
               onClick={() => setIsModalOpen(true)}
               className="px-8 py-3 text-white bg-gradient-to-r from-[#465697] to-[#5a67b1] text-md font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 border border-blue-500/30"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(59,130,246,0.4)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(59,130,246,0.4)",
+              }}
               whileTap={{ scale: 0.95 }}
+              disabled
             >
               Contact Me
-            </motion.button>
+            </Motion.button>
 
-            <motion.button
+            <Motion.button
               onClick={() => {
                 toast.success("📄 Resume is being downloading!");
                 // trigger file download
                 setTimeout(() => {
                   const link = document.createElement("a");
-                  link.href = `${import.meta.env.BASE_URL}BIPLAB_Resume.pdf`; // resume stored in public folder
-                  link.download = "Biplab_Biswas_Resume.pdf";
+                  link.href = `${import.meta.env.BASE_URL}mithun_resume.pdf`; // resume stored in public folder
+                  link.download = "mithun_resume.pdf";
                   document.body.appendChild(link);
                   link.click();
                   document.body.removeChild(link);
@@ -178,29 +209,29 @@ const Home = () => {
             >
               <FiDownload className="text-xl" />
               Download Resume
-            </motion.button>
-          </motion.div>
-        </motion.div>
+            </Motion.button>
+          </Motion.div>
+        </Motion.div>
 
         {/* RIGHT IMAGE */}
-        <motion.div
+        <Motion.div
           className="mt-12 md:mt-0 md:w-1/2 lg:w-2/5 flex justify-center items-center relative"
           variants={avatarVariants}
           initial="hidden"
           animate="visible"
           whileHover="hover"
         >
-          <motion.img
+          <Motion.img
             className="w-72 md:w-80 lg:w-96 drop-shadow-2xl z-10 relative"
             src={avatarImg}
             alt="Biplab Biswas Avatar"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl scale-110 z-0" />
-        </motion.div>
-      </motion.div>
+        </Motion.div>
+      </Motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <Motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -208,12 +239,12 @@ const Home = () => {
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2" />
         </div>
-      </motion.div>
+      </Motion.div>
 
       {/* Contact Modal */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div
+          <Motion.div
             className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -221,16 +252,16 @@ const Home = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             {/* Outer glow */}
-            <motion.div
+            <Motion.div
               className="absolute inset-0 flex justify-center items-center pointer-events-none"
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.25 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <div className="w-[400px] h-[400px] bg-gradient-to-r from-[#465697] to-[#ffb347] rounded-full blur-[120px]" />
-            </motion.div>
+            </Motion.div>
 
-            <motion.div
+            <Motion.div
               initial={{ scale: 0.8, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -247,16 +278,24 @@ const Home = () => {
               </button>
 
               <div className="text-center mb-6">
-                <h2 className="text-3xl font-bold text-[#ffb347] mb-2">Let’s Connect ✨</h2>
+                <h2 className="text-3xl font-bold text-[#ffb347] mb-2">
+                  Let’s Connect ✨
+                </h2>
                 <p className="text-gray-300 text-sm">
                   Have a question or opportunity? Drop me a quick message!
                 </p>
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-4" aria-live="polite">
-                <motion.div className="flex flex-col space-y-2">
-                  <label className="text-sm text-gray-400 font-medium">Your Name</label>
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-4"
+                aria-live="polite"
+              >
+                <Motion.div className="flex flex-col space-y-2">
+                  <label className="text-sm text-gray-400 font-medium">
+                    Your Name
+                  </label>
                   <input
                     name="name"
                     type="text"
@@ -265,10 +304,12 @@ const Home = () => {
                     required
                     disabled={isSubmitting}
                   />
-                </motion.div>
+                </Motion.div>
 
-                <motion.div className="flex flex-col space-y-2">
-                  <label className="text-sm text-gray-400 font-medium">Your Email</label>
+                <Motion.div className="flex flex-col space-y-2">
+                  <label className="text-sm text-gray-400 font-medium">
+                    Your Email
+                  </label>
                   <input
                     name="email"
                     type="email"
@@ -277,10 +318,12 @@ const Home = () => {
                     required
                     disabled={isSubmitting}
                   />
-                </motion.div>
+                </Motion.div>
 
-                <motion.div className="flex flex-col space-y-2">
-                  <label className="text-sm text-gray-400 font-medium">Message</label>
+                <Motion.div className="flex flex-col space-y-2">
+                  <label className="text-sm text-gray-400 font-medium">
+                    Message
+                  </label>
                   <textarea
                     name="message"
                     rows="4"
@@ -289,30 +332,32 @@ const Home = () => {
                     required
                     disabled={isSubmitting}
                   />
-                </motion.div>
+                </Motion.div>
 
                 {formStatus && (
                   <div
                     role="status"
-                    className={`px-3 py-2 rounded-md text-sm ${formStatus.type === "success"
-                      ? "bg-green-800 text-green-200"
-                      : "bg-rose-900 text-rose-200"
-                      }`}
+                    className={`px-3 py-2 rounded-md text-sm ${
+                      formStatus.type === "success"
+                        ? "bg-green-800 text-green-200"
+                        : "bg-rose-900 text-rose-200"
+                    }`}
                   >
                     {formStatus.message}
                   </div>
                 )}
 
-                <motion.button
+                <Motion.button
                   type="submit"
                   whileHover={!isSubmitting ? { scale: 1.03 } : {}}
                   whileTap={!isSubmitting ? { scale: 0.95 } : {}}
                   disabled={isSubmitting}
                   className={`relative w-full py-3 rounded-full font-semibold text-white overflow-hidden transition-all duration-300
-    ${isSubmitting
+                  ${
+                    isSubmitting
                       ? "bg-gradient-to-r from-[#465697] to-[#5a67b1] opacity-70 cursor-not-allowed"
                       : "bg-gradient-to-r from-[#465697] to-[#5a67b1] hover:from-[#5a67b1] hover:to-[#465697] shadow-lg hover:shadow-[#465697]/40"
-                    }`}
+                  }`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {isSubmitting ? (
@@ -325,15 +370,15 @@ const Home = () => {
                     )}
                   </span>
 
-                  <motion.div
+                  <Motion.div
                     className="absolute inset-0 bg-gradient-to-r from-[#ffb347]/20 to-[#465697]/30 blur-md"
                     animate={{ opacity: [0.3, 0.6, 0.3] }}
                     transition={{ duration: 3, repeat: Infinity }}
                   />
-                </motion.button>
+                </Motion.button>
               </form>
-            </motion.div>
-          </motion.div>
+            </Motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
     </section>

@@ -1,105 +1,170 @@
 "use client";
-import { IoCodeSlashOutline } from "react-icons/io5";
-import { motion } from "framer-motion";
+import { MdOutlineLiveTv } from "react-icons/md";
+import { motion as Motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const containerVariants = {
-  hidden: { opacity: 0, y: 20 },
   show: {
-    opacity: 1,
-    y: 0,
-    transition: { when: "beforeChildren", staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
+// 🔥 Experience Data
+const experienceData = [
+  {
+    icon: <MdOutlineLiveTv color="#ffb347" size={40} />,
+    title: "Assistant Producer",
+    company: "Zee Media Corporation Limited, New Delhi",
+    duration: "2024 – Present",
+    points: [
+      "Conceptualize and produce daily news bulletins, prime-time shows, and special segments ensuring accuracy and engagement.",
+      "Script and edit news packages with strong focus on storytelling and editorial guidelines.",
+    ],
+  },
+
+  {
+    icon: <MdOutlineLiveTv color="#ffb347" size={40} />,
+    title: "Assistant Producer",
+    company: "Bharat Express, Noida",
+    duration: "2023 – 2024",
+    points: [
+      "Produced live news shows and prime-time debates while coordinating with editorial & technical teams.",
+      "Wrote and edited scripts, headlines, and tickers for on-air content.",
+    ],
+  },
+
+  {
+    icon: <MdOutlineLiveTv color="#ffb347" size={40} />,
+    title: "Assistant Producer",
+    company: "India News, Noida",
+    duration: "2022 – 2023",
+    points: [
+      "Assisted in daily news show production including scripting, video editing, and newsroom coordination.",
+      "Supported senior producers in preparing rundowns and executing live telecasts.",
+    ],
+  },
+];
+
+const ITEMS_PER_PAGE = 2;
+
 const Experience = () => {
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil(experienceData.length / ITEMS_PER_PAGE);
+
+  const currentData = experienceData.slice(
+    page * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+  );
+
+  const nextPage = () => {
+    if (page < totalPages - 1) setPage(page + 1);
+  };
+
+  const prevPage = () => {
+    if (page > 0) setPage(page - 1);
+  };
+
   return (
-    <motion.section
+    <Motion.section
       id="Experience"
-      className="px-8 md:px-20 py-12 text-white bg-black bg-opacity-30 rounded-2xl shadow-xl mx-4 md:mx-20 my-10 overflow-hidden"
+      className="px-8 md:px-20 py-12 text-white bg-black bg-opacity-30 rounded-2xl shadow-xl mx-4 md:mx-20 my-10"
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
-      variants={containerVariants}
     >
-      {/* Header */}
-      <motion.h2
+      <Motion.h2
         className="text-3xl md:text-4xl font-extrabold mb-10 text-[#ffb347] text-center"
         variants={itemVariants}
+        initial="hidden"
+        animate="show"
       >
         Experience
-      </motion.h2>
+      </Motion.h2>
 
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-10">
-        {/* RIGHT: Experience Details */}
-        <motion.div
-          className="flex-1 space-y-6"
-          variants={containerVariants}
+      {/* Experience Cards */}
+      <AnimatePresence mode="wait">
+        <Motion.div
+          key={page}
+          initial={{ opacity: 0, x: 70 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -70 }}
+          transition={{ duration: 0.4 }}
+          className="space-y-6"
         >
-          {/* CARD */}
-          <motion.div
-            className="bg-[#0d1b2a] bg-opacity-60 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-[#ffb347]/20 transition-all duration-300 hover:-translate-y-1"
-            variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-          >
-            <motion.div
-              className="flex items-center gap-4 mb-2"
-              variants={itemVariants}
-            >
-              <IoCodeSlashOutline color="#ffb347" size={40} />
-              <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-white">
-                  Full Stack Developer Intern – Ariedge
-                </h3>
-                <p className="text-sm text-gray-400">Dec 2024 – Jul 2025</p>
-              </div>
-            </motion.div>
-
-            <motion.ul
-              className="list-disc list-inside text-gray-300 text-sm md:text-base mt-3 leading-relaxed space-y-2"
+          {currentData.map((exp, idx) => (
+            <Motion.div
+              key={idx}
+              className="bg-[#0d1b2a] bg-opacity-60 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-[#ffb347]/20 transition-all duration-300"
               variants={containerVariants}
+              initial="hidden"
+              animate="show"
             >
-              {[
-                <>
-                  Developed full-stack web applications using{" "}
-                  <span className="text-white font-medium">
-                    React.js, Node.js, Express.js, MongoDB, and PostgreSQL
-                  </span>.
-                </>,
-                <>
-                  Designed responsive and reusable UI components with{" "}
-                  <span className="text-white font-medium">Tailwind CSS</span>{" "}
-                  and integrated RESTful APIs.
-                </>,
-                <>
-                  Built and deployed projects including{" "}
-                  <span className="text-white font-medium">
-                    SwiftMart Shopping Website
-                  </span>{" "}
-                  and an{" "}
-                  <span className="text-white font-medium">
-                    Email Application
-                  </span>.
-                </>,
-                <>
-                  Collaborated with team members using{" "}
-                  <span className="text-white font-medium">Git & GitHub</span>{" "}
-                  for version control and agile workflow.
-                </>,
-              ].map((item, i) => (
-                <motion.li key={i} variants={itemVariants}>
-                  {item}
-                </motion.li>
-              ))}
-            </motion.ul>
-          </motion.div>
-        </motion.div>
+              <div className="flex items-center gap-4 mb-2">
+                {exp.icon}
+                <div>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white">
+                    {exp.title} – {exp.company}
+                  </h3>
+                  <p className="text-sm text-gray-400">{exp.duration}</p>
+                </div>
+              </div>
+
+              <ul className="list-disc list-inside text-gray-300 text-sm md:text-base mt-3 leading-relaxed space-y-2">
+                {exp.points.map((point, i) => (
+                  <Motion.li key={i} variants={itemVariants}>
+                    {point}
+                  </Motion.li>
+                ))}
+              </ul>
+            </Motion.div>
+          ))}
+        </Motion.div>
+      </AnimatePresence>
+
+      {/* Pagination */}
+      <div className="flex justify-between items-center mt-8">
+        <button
+          onClick={prevPage}
+          disabled={page === 0}
+          className={`px-4 py-2 rounded-lg border border-[#ffb347] text-[#ffb347] transition-all ${
+            page === 0
+              ? "opacity-40 cursor-not-allowed"
+              : "hover:bg-[#ffb347] hover:text-black"
+          }`}
+        >
+          Previous
+        </button>
+
+        <div className="flex gap-2">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <div
+              key={i}
+              className={`w-3 h-3 rounded-full ${
+                i === page ? "bg-[#ffb347]" : "bg-gray-600"
+              }`}
+            ></div>
+          ))}
+        </div>
+
+        <button
+          onClick={nextPage}
+          disabled={page === totalPages - 1}
+          className={`px-4 py-2 rounded-lg border border-[#ffb347] text-[#ffb347] transition-all ${
+            page === totalPages - 1
+              ? "opacity-40 cursor-not-allowed"
+              : "hover:bg-[#ffb347] hover:text-black"
+          }`}
+        >
+          Next
+        </button>
       </div>
-    </motion.section>
+    </Motion.section>
   );
 };
 
