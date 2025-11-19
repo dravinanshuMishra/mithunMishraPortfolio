@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 
 const TextChange = () => {
   const texts = useMemo(
-    () => ["Full Stack Developer", "Frontend Developer", "Backend Developer"],
+    () => ["Investigative Journalist", "Political Analyst", "Field Reporter"],
     []
   );
 
@@ -15,7 +15,9 @@ const TextChange = () => {
     const current = texts[index];
     const typing = () => {
       setCurrentText((prev) =>
-        isDeleting ? current.substring(0, prev.length - 1) : current.substring(0, prev.length + 1)
+        isDeleting
+          ? current.substring(0, prev.length - 1)
+          : current.substring(0, prev.length + 1)
       );
 
       setSpeed(isDeleting ? 60 : 120);
