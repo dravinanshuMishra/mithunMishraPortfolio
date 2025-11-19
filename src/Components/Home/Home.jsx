@@ -185,6 +185,7 @@ const Home = () => {
                 boxShadow: "0 10px 25px -5px rgba(59,130,246,0.4)",
               }}
               whileTap={{ scale: 0.95 }}
+              disabled
             >
               Contact Me
             </Motion.button>

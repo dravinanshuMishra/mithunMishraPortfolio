@@ -2,7 +2,11 @@ import { useState, useEffect, useMemo } from "react";
 
 const TextChange = () => {
   const texts = useMemo(
-    () => ["Investigative Journalist", "Political Analyst", "Field Reporter"],
+    () => [
+      "Investigative Journalist",
+      "Political Analyst",
+      "Assistant Producer",
+    ],
     []
   );
 
